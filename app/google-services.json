@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "258486991890",
+    "firebase_url": "https://homymarketvendor.firebaseio.com",
+    "project_id": "homymarketvendor",
+    "storage_bucket": "homymarketvendor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258486991890:android:6bfc495ba20dda11",
+        "android_client_info": {
+          "package_name": "com.example.alok.homymarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258486991890-gfk6i369l1huophj5p2np7busuq4g6gb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.alok.homymarket",
+            "certificate_hash": "ed8aa9ff1083670fbff0ee1d98602af318a02dff"
+          }
+        },
+        {
+          "client_id": "258486991890-04ulsum8j1jad7ff4gvjavjv8vmmr2do.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTv0Ogw1ok0oDZTqtRDg4-CKjFGMnV1Tk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258486991890-04ulsum8j1jad7ff4gvjavjv8vmmr2do.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
