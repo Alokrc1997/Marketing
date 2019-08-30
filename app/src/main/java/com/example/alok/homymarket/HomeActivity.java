@@ -29,6 +29,8 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent i=new Intent(HomeActivity.this,StockActivity.class);
+                i.putExtra("pass",mpass);
+                i.putExtra("id",mid);
                 startActivity(i);
 
             }
@@ -73,6 +75,11 @@ public class HomeActivity extends AppCompatActivity {
 
          if(item.getItemId()==R.id.changePass)
          {
+             Intent password=new Intent(HomeActivity.this,PasswordChange.class);
+             password.putExtra("pass",mpass);
+             password.putExtra("id",mid);
+             startActivity(password);
+
 
          }
         return true;
