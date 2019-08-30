@@ -10,6 +10,7 @@ import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
     Button stockBtn,orderBtn,uploadBtn;
+     String mid,mpass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +19,10 @@ public class HomeActivity extends AppCompatActivity {
         stockBtn=findViewById(R.id.stockBtn);
         orderBtn=findViewById(R.id.orderBtn);
         uploadBtn=findViewById(R.id.uploadBtn);
+
+        Intent a=getIntent();
+        mid=a.getStringExtra("id");
+        mpass=a.getStringExtra("pass");
 
         stockBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +49,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent i=new Intent(HomeActivity.this,UploadActivity.class);
+                i.putExtra("id",mid);
                 startActivity(i);
 
             }

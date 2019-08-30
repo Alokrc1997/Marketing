@@ -72,6 +72,8 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                         Intent i=new Intent(LoginActivity.this,HomeActivity.class);
+                        i.putExtra("id",mid);
+                        i.putExtra("pass",mpass);
                         startActivity(i);
                     }
                     else if(Response.equals("false"))
@@ -95,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String,String> map =new HashMap<>();
                 map.put("username",mid);
                 map.put("password",mpass);

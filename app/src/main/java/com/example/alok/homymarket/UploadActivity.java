@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ public class UploadActivity extends AppCompatActivity {
     String title,base,selling,items;
     private Bitmap bitmap;
     private Uri filePath;
+    String mid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,9 @@ public class UploadActivity extends AppCompatActivity {
         mSelling=findViewById(R.id.uploadPrice);
         mItem=findViewById(R.id.uploadNo);
         mUpload=findViewById(R.id.uploadBtn);
+        Intent intent=getIntent();
+        mid=intent.getStringExtra("id");
+
 
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +75,7 @@ public class UploadActivity extends AppCompatActivity {
                 StringRequest sr=new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.e("aaa",response);
 
                         try {
                             JSONObject jsonObject=new JSONObject(response);
@@ -89,12 +95,13 @@ public class UploadActivity extends AppCompatActivity {
                     }
                 }){
                     @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
+                    protected Map<String, String> getParams() {
                         Map<String,String> map=new HashMap<>();
                         map.put("title",title);
                         map.put("base",base);
                         map.put("selling",selling);
                         map.put("items",items);
+                        map.put("table",mid);
                         map.put("image",getStringImage(bitmap));
 
                         return map;
@@ -134,8 +141,8 @@ public class UploadActivity extends AppCompatActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
     }
 
     private void getValues(){
