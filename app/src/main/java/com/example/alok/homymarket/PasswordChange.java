@@ -56,7 +56,9 @@ public class PasswordChange extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             if(response.equals("true")){
+                                oldpass=newpass;
                                 Toast.makeText(PasswordChange.this, "Password changed successfully", Toast.LENGTH_SHORT).show();
+
                             }else{
                                 Toast.makeText(PasswordChange.this, "Unable to change Password right now", Toast.LENGTH_SHORT).show();
                             }
@@ -65,6 +67,8 @@ public class PasswordChange extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+
+                            Toast.makeText(PasswordChange.this, error.toString(), Toast.LENGTH_SHORT).show();
 
                         }
                     }){
