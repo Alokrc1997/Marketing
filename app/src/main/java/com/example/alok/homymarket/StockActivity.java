@@ -1,11 +1,11 @@
 package com.example.alok.homymarket;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -23,7 +23,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class StockActivity extends AppCompatActivity {
@@ -62,7 +61,8 @@ public class StockActivity extends AppCompatActivity {
 
                                 JSONObject j=a.getJSONObject(i);
                                 Model model=new Model(j.getString("title"),j.getString("base"),j.getString("selling"),
-                                        j.getString("id"),j.getString("link"),j.getString("noItem"));
+                                        j.getString("id"),j.getString("link1"),j.getString("link2"),j.getString("link3")
+                                        ,j.getString("link4"),j.getString("noItem"),j.getString("descp"));
                                 list.add(model);
 
                             }

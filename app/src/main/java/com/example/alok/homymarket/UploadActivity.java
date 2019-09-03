@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -32,13 +31,15 @@ import java.util.Map;
 
 public class UploadActivity extends AppCompatActivity {
     ImageView image;
-    private int PICK_IMAGE_REQUEST = 1;
-    EditText mTitle,mBase,mSelling,mItem;
-    Button mUpload;
+    EditText mTitle,mBase,mSelling,mItem,mdescrip;
+
+
+    byte[] imageBytes;
+    Button mUpload,pic1,pic2,pic3,pic4;
     String URL="https://homimarket.com/wp-content/Alok/data_upload.php";
-    String title,base,selling,items;
-    private Bitmap bitmap;
-    private Uri filePath;
+    String title,base,selling,items,descrip;
+    private Bitmap bitmap1,bitmap2,bitmap3,bitmap4;
+    private Uri filePath1,filePath2,filePath3,filePath4;
     String mid;
 
     @Override
@@ -46,19 +47,72 @@ public class UploadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
         image=findViewById(R.id.uploadImage);
+        mdescrip=findViewById(R.id.uploadDescription);
         mTitle=findViewById(R.id.uploadTitle);
         mBase=findViewById(R.id.uploadBase);
         mSelling=findViewById(R.id.uploadPrice);
         mItem=findViewById(R.id.uploadNo);
         mUpload=findViewById(R.id.uploadBtn);
+        pic1=findViewById(R.id.pic1);
+        pic2=findViewById(R.id.pic2);
+        pic3=findViewById(R.id.pic3);
+        pic4=findViewById(R.id.pic4);
+
+
         Intent intent=getIntent();
         mid=intent.getStringExtra("id");
 
 
-        image.setOnClickListener(new View.OnClickListener() {
+        pic1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFileChooser();
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                Log.e("pic1","pic1");
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+                //showFileChooser();
+            }
+
+
+        });
+        pic2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                Log.e("pic2","pic2");
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 2);
+
+                //showFileChooser();
+            }
+
+
+        });
+        pic3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                Log.e("pic3","pic3");
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 3);
+                //showFileChooser();
+            }
+
+
+        });
+
+        pic4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                Log.e("pic4","pic4");
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 4);
+                //showFileChooser();
             }
 
 
@@ -102,7 +156,12 @@ public class UploadActivity extends AppCompatActivity {
                         map.put("selling",selling);
                         map.put("items",items);
                         map.put("table",mid);
-                        map.put("image",getStringImage(bitmap));
+                        map.put("des",descrip);
+                        //Log.e("aaa",getStringImage(filePath1));
+                        map.put("image1",getStringImage(bitmap1));
+                        map.put("image2",getStringImage(bitmap2));
+                        map.put("image3",getStringImage(bitmap3));
+                        map.put("image4",getStringImage(bitmap4));
 
                         return map;
                     }
@@ -111,26 +170,60 @@ public class UploadActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
-    private void showFileChooser() {
-
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
-            filePath = data.getData();
+            filePath1 = data.getData();
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                image.setImageBitmap(bitmap);
+                bitmap1 = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath1);
+                image.setImageBitmap(bitmap1);
+                pic1.setText("Selected");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (requestCode == 2 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            filePath2 = data.getData();
+            try {
+                bitmap2 = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath2);
+                image.setImageBitmap(bitmap2);
+                pic2.setText("Selected");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if (requestCode == 3 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            filePath3 = data.getData();
+            try {
+                bitmap3 = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath3);
+                image.setImageBitmap(bitmap3);
+                pic3.setText("Selected");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (requestCode == 4 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            filePath4 = data.getData();
+            try {
+                bitmap4 = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath4);
+                image.setImageBitmap(bitmap4);
+                pic4.setText("Selected");
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -138,11 +231,16 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     public String getStringImage(Bitmap bmp){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+    bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+     imageBytes = baos.toByteArray();
+     Log.e("alok",imageBytes.toString());
+
+
+
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
     private void getValues(){
@@ -150,7 +248,10 @@ public class UploadActivity extends AppCompatActivity {
         base=mBase.getText().toString().trim();
         selling=mSelling.getText().toString().trim();
         items=mItem.getText().toString().trim();
+        descrip=mdescrip.getText().toString().trim();
 
     }
+
+
 
 }
