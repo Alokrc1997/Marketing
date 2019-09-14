@@ -166,6 +166,7 @@ public class UploadActivity extends AppCompatActivity {
                         return map;
                     }
                 };
+                sr.setShouldCache(false);
                 rq.add(sr);
 
             }

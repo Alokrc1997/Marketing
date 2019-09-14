@@ -41,6 +41,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent i=new Intent(HomeActivity.this,OrderActivity.class);
+                i.putExtra("id",mid);
                 startActivity(i);
 
             }

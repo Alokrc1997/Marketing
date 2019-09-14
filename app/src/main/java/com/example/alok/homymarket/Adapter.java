@@ -4,8 +4,9 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +44,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         this.lists=lists;
         this.id=id;
         this.password=password;
-        Log.e("aaaa",lists.toString());
 
     }
 
@@ -130,7 +131,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         Button update,dec,inc;
         TextView no;
         CardView card;
+        ViewPager pager;
+        LinearLayout linearLayout;
+        private ImageView[] dots;
 
+        int dots_count=4;
+
+        RelativeLayout relativeLayout;
         int a;
         String m,n;
 
